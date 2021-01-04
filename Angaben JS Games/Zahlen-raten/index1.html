@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="DE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahlenraten</title>
+</head>
+
+<body>
+    <h1>Zahlenraten</h1>
+
+    <p>Der Computer sucht sich eine Zahl aus - Versuche diese zu erraten!</p>
+    <p>Bitte die Zahlenobergrenze und wieviele Versuche eingeben:</p>
+
+    <label for="obereGrenze">Zahlenobergrenze:</label>
+    <input type="number" id="obereGrenze">
+    <button onclick="zog()">Bestätigen</button>
+
+    <label for="anzahlDerVersuche">Wie viele Versuche:</label>
+    <input type="number" id="anzahlDerVersuche">
+    <button onclick="adv()">Bestätigen</button>
+
+    <p>Deine Zahlenobergrenze:</p>
+    <p id="eingabeZOG"></p>
+    <p>Anzahl der Versuche:</p>
+    <p id="eingabeADV"></p>
+
+
+    <label for="gerateneZahl">Deine geratene Zahl:</label>
+    <input type="number" id="gerateneZahl">
+    <button onclick="zahleingabe()">Bestätigen</button>
+
+    <p id="zuNiedrig"></p>
+    <p id="zuHoch"></p>
+    <p id="richtig"></p>
+    <p id="nichtErkannt"></p>
+
+    <button onclick="neuesSpiel">Neues Spiel starten</button>
+
+    <script>
+        "use strict";
+
+        let obereGrenze = document.getElementById('obereGrenze');
+        let anzahlDerVersuche = document.getElementById('anzahlDerVersuche');
+        let gerateneZahl = document.getElementById('gerateneZahl');
+
+        //let zahl = Math.floor(Math.random() * obereGrenze.value + 1);
+
+        function zufallszahl(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function zog() { //zog = zahlen obergrenze
+            eingabeZOG.innerHTML = obereGrenze.value;
+            let min = 0;
+            let max = obereGrenze.value;
+            let zahl = zufallszahl(min, max);
+            console.log(zahl);
+            return zahl;
+        }
+
+        function adv() { //adv = anzahl der versuche
+            eingabeADV.innerHTML = anzahlDerVersuche.value;
+        }
+
+        function zahleingabe(zahl) {
+            //if (anzahlDerVersuche > 0) {
+            console.log(gerateneZahl.value);
+            let meineZahl = Number(gerateneZahl.value);
+            if (meineZahl < zahl) {
+                zuNiedrig.innerHTML = 'Der Tipp war zu niedrig';
+            } else if (meineZahl > zahl) {
+                zuHoch.innerHTML = 'Der Tipp war zu hoch';
+            } else if (meineZahl == zahl) {
+                richtig.innerHTML = 'TOLL - Du hast die Zahl erraten!';
+            } else {
+                nichtErkannt.innerHTML = 'Leider habe ich diese Eingabe nicht erkannt';
+            }
+            // anzahlDerVersuche--;
+        }
+    </script>
+</body>
+
+</html>
